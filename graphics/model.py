@@ -1,9 +1,9 @@
-from entities import unittype
+from resources.data import gamedata
 
 class Model:
-    def __init__(self, typ, modelbox):
-        self.type = typ
-        self.image = unittype.IMAGES[self.type]
+    def __init__(self, type, modelbox):
+        self.type = gamedata.get_type(type)
+        self.image = self.type["image"]
         self.modelbox = modelbox
 
     def draw(self, window):

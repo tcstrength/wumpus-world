@@ -1,8 +1,10 @@
 from graphics.blank import Blank
+from graphics.grid import Grid
 
 class GameBoard:
     def __init__(self, row_count, col_count):
         self.board = list()
+        self.grid = Grid()
         for i in range(row_count):
             self.board.append(list())
             for j in range(col_count):
@@ -23,3 +25,5 @@ class GameBoard:
                 modelbox.y = (rows - i - 1) * modelbox.height
                 self.board[i][j].modelbox = modelbox
                 self.board[i][j].draw(window)
+
+        self.grid.draw(window)
