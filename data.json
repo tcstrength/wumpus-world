@@ -12,6 +12,19 @@
         "GRID": 
         {
             "image": "grid.png"
+        },
+        "STENCH":
+        {
+            "image": "stench.png"
+        },
+        "BREEZE":
+        {
+            "image": "breeze.png"
+        }
+        ,
+        "WUMPUS":
+        {
+            "image": "wumpus.png"
         }
     },
     "rows": 10,
