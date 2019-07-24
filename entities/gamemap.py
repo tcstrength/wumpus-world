@@ -1,4 +1,4 @@
-from entities.types import *
+from entities.statustypes import *
 
 class Cell:
     def __init__(self):

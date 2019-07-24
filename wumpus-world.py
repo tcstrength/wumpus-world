@@ -8,15 +8,12 @@ from resources.data import gamedata
 from entities.modelbox import ModelBox
 from entities.gamemap import GameMap
 from entities.gamecontrol import GameControl
-from entities.gamecontrol import DIRECTIONS, LEFT, RIGHT, TOP, BOTTOM
 from graphics.window import Window
 from graphics.gameboard import GameBoard
 from graphics.models.archer import Archer
 from graphics.models.pit import Pit
 from graphics.models.wumpus import Wumpus
-from entities.types import PIT
-from entities.types import WUMPUS
-from ailogic.mainlogic import main_logic
+from ailogic import mainlogic
 
 pygame.init()
 
@@ -27,11 +24,9 @@ gamemap.load_map("maps/map1.txt")
 gamecontrol = GameControl(gamemap)
 board = GameBoard(gamemap)
 
-gamecontrol.move(DIRECTIONS[TOP])
-
 while (window.running):
     window.begin()
-    main_logic(gamemap, gamecontrol)
+    mainlogic.main(gamemap, gamecontrol)
     board.draw(window)
     window.end()
 
