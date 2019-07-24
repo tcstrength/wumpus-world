@@ -25,6 +25,14 @@
         "WUMPUS":
         {
             "image": "wumpus.png"
+        },
+        "GOLD":
+        {
+            "image": "gold.png"
+        },
+        "CLOSE":
+        {
+            "image": "close.png"
         }
     },
     "rows": 10,
