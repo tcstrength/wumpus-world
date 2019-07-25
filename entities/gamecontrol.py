@@ -1,16 +1,22 @@
 from graphics.gameboard import GameBoard
 from entities.statustypes import AGENT
+from entities.directions import DIRECTIONS
 
 class GameControl:
-    def __init__(self, gameboard):
-        self.gameboard = gameboard
+    def __init__(self, gamemap):
+        self.gamemap = gamemap
 
     def move(self, direction):
-        row, col = self.gameboard.find_agent()
-        self.gameboard.del_status(row, col, AGENT)
-        row += direction[1]
-        col += direction[0]
-        self.gameboard.add_status(row, col, AGENT)
-        return [row, col]
+        row, col = self.gamemap.find_agent()
+        directionCoord = DIRECTIONS[direction]
+        nextrow = row + directionCoord[1]
+        nextcol = col + directionCoord[0]
+
+        if (self.gamemap.is_legal(nextrow, nextcol) == False):
+            return [row, col]
+
+        self.gamemap.del_status(row, col, AGENT)
+        self.gamemap.add_status(nextrow, nextcol, AGENT)
+        return [nextrow, nextcol]
 
 

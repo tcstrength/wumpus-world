@@ -50,7 +50,7 @@ class GameMap:
                 line += str(self.cell_table[i][j].status) + " "
             print(line)
 
-    def __is_legal(self, row, col):
+    def is_legal(self, row, col):
         zero = row >= 0 and col >= 0
         size = row < self.get_row_count() and col < self.get_col_count()
         return zero and size
@@ -59,22 +59,22 @@ class GameMap:
         rows = [row - 1, row    ,row + 1, row]
         cols = [col    , col - 1, col   , col + 1]
         for i in range(4):
-            if (self.__is_legal(rows[i], cols[i]) == False):
+            if (self.is_legal(rows[i], cols[i]) == False):
                 continue
             self.add_status(rows[i], cols[i], status)
 
     def open(self, row, col):
-        if (self.__is_legal(row, col) == False):
+        if (self.is_legal(row, col) == False):
             return
         self.cell_table[row][col].closed = False
 
     def add_status(self, row, col, status):
-        if (self.__is_legal(row, col) == False):
+        if (self.is_legal(row, col) == False):
             return
         self.cell_table[row][col].status |= status
 
     def del_status(self, row, col, status):
-        if (self.__is_legal(row, col) == False):
+        if (self.is_legal(row, col) == False):
             return
         self.cell_table[row][col].status &= ~status
 
@@ -87,6 +87,6 @@ class GameMap:
         self.__add_status_arround(row, col, BREEZE)
 
     def has_status(self, row, col, status):
-        if (self.__is_legal(row, col) == False):
+        if (self.is_legal(row, col) == False):
             return False
         return (self.cell_table[row][col].status & status) > 0

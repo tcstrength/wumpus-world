@@ -7,7 +7,7 @@ from graphics.models.archer import Archer
 from graphics.models.gold import Gold
 from graphics.models.blank import Blank
 from resources.data import gamedata
-from entities.types import *
+from entities.statustypes import *
 
 class GameBoard:
     def __init__(self, map):
