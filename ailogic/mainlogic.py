@@ -3,12 +3,22 @@ from entities.directions import *
 from ailogic.process import *
 import time
 
-def main(gamemap, gamecontrol):
+def main(gamemap, gamecontrol, move):
     process = Process(gamemap)
-    s = chr(gamemap.find_agent()[0] + 48) + ',' + chr(gamemap.find_agent()[1] + 48)
-    process.PossibleMove(s)
+    # s = chr(gamemap.find_agent()[0] + 48) + ',' + chr(gamemap.find_agent()[1] + 48)
+    # process.PossibleMove(s)
     
-    row,col = gamecontrol.move(RIGHT)
+    if(not move):
+        move = process.CalculateMove()
+        print(move)
+    if(move and move[0] is None):
+        return
+    s = move[0]
+    move_next = s.split(',')
+    y = int(move_next[0])
+    x = int(move_next[1])
+    row,col = gamecontrol.move(y,x)
+    # row,col = gamecontrol.move(RIGHT)
     gamemap.open(row, col)
     
     if (gamemap.has_status(row, col, STENCH)):

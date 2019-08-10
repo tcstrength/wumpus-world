@@ -18,5 +18,14 @@ class GameControl:
         self.gamemap.del_status(row, col, AGENT)
         self.gamemap.add_status(nextrow, nextcol, AGENT)
         return [nextrow, nextcol]
+    
+    def move(self, next_row, next_col):
+        row, col = self.gamemap.find_agent()
+        if (self.gamemap.is_legal(next_row, next_col) == False):
+            return [row, col]
+
+        self.gamemap.del_status(row, col, AGENT)
+        self.gamemap.add_status(next_row, next_col, AGENT)
+        return [next_row, next_col]
 
 

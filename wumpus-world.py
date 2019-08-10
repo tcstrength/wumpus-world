@@ -23,10 +23,10 @@ gamemap = GameMap(10, 10)
 gamemap.load_map("maps/map1.txt")
 gamecontrol = GameControl(gamemap)
 board = GameBoard(gamemap)
-
+move = []
 while (window.running):
     window.begin()
-    mainlogic.main(gamemap, gamecontrol)
+    mainlogic.main(gamemap, gamecontrol, move)
     board.draw(window)
     window.end()
 

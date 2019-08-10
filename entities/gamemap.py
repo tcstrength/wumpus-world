@@ -7,6 +7,8 @@ class Cell:
 
 class GameMap:
     def __init__(self, row_count, col_count):
+        self.Visited = []
+        self.Safe = []
         self.cell_table = [[]] * row_count
         for i in range(row_count):
             self.cell_table[i] = [None] * col_count
@@ -75,6 +77,9 @@ class GameMap:
         if (self.is_legal(row, col) == False):
             return
         self.cell_table[row][col].closed = False
+        s = chr(row + 48) + ',' + chr(col + 48)
+        self.Visited.append(s)
+        self.Safe.append(s)
 
     def add_status(self, row, col, status):
         if (self.is_legal(row, col) == False):
