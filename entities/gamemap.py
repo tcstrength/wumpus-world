@@ -21,12 +21,13 @@ class GameMap:
                     return [i, j]
         return [-1, -1]
 
-    # def findPitOrWumpus(self, posX, posY):
-    #     for i in range(self.get_row_count()):
-    #         for j in range(self.get_col_count()):
-    #             if (self.has_status(i, j, AGENT)):
-    #                 return [i, j]
-    #     return -1
+    def findSafe(self):
+        res = []
+        for i in range(self.get_row_count()):
+            for j in range(self.get_col_count()):
+                if (self.has_status(i, j, WUMPUS) == False or self.has_status(i, j, PIT) == False):
+                    res.append(chr(i + 48) + ',' + chr(j + 48))
+        return res
     
     def load_map(self, path):
         f = open(path, "r")

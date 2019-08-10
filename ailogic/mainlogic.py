@@ -7,8 +7,10 @@ def main(gamemap, gamecontrol):
     process = Process(gamemap)
     s = chr(gamemap.find_agent()[0] + 48) + ',' + chr(gamemap.find_agent()[1] + 48)
     process.PossibleMove(s)
+    
     row,col = gamecontrol.move(RIGHT)
     gamemap.open(row, col)
+    
     if (gamemap.has_status(row, col, STENCH)):
         print("STENCH")
     if (gamemap.has_status(row, col, BREEZE)):
