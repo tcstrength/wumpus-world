@@ -17,11 +17,14 @@ def main(gamemap, gamecontrol, move):
     move_next = s.split(',')
     y = int(move_next[0])
     x = int(move_next[1])
+    #print(y, x)
     row,col = gamecontrol.move(y,x)
+    #print(row, col)
+    
     # row,col = gamecontrol.move(RIGHT)
     gamemap.open(row, col)
     
-    if (gamemap.has_status(row, col, STENCH)):
+    '''if (gamemap.has_status(row, col, STENCH)):
         print("STENCH")
     if (gamemap.has_status(row, col, BREEZE)):
         print("Breeze")
@@ -30,5 +33,5 @@ def main(gamemap, gamecontrol, move):
     if (gamemap.has_status(row, col, PIT)):
         print("PIT")
     if (gamemap.has_status(row, col, WUMPUS)):
-        print("WUMPUS")
+        print("WUMPUS")'''
     time.sleep(0.5)

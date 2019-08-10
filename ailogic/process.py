@@ -17,25 +17,25 @@ class Process:
         if(x - 1 >= 0):
             posX = x - 1
             posY = y
-            s =  chr(posX + 48) + ',' + chr(posY + 48)
+            s =  chr(posY + 48) + ',' + chr(posX + 48)
             if(self.map.has_status(posY, posX, WUMPUS) == False and self.map.has_status(posY, posX, PIT) == False):
                 arrMove.append(s)
         if(x + 1 <= 9):
             posX = x + 1
             posY = y 
-            s =  chr(posX + 48) + ',' + chr(posY + 48)
+            s =  chr(posY + 48) + ',' + chr(posX + 48)
             if(self.map.has_status(posY, posX, WUMPUS) == False and self.map.has_status(posY, posX, PIT) == False):
                 arrMove.append(s)
         if(y - 1 >= 0):
             posX = x
             posY = y - 1 
-            s =  chr(posX + 48) + ',' + chr(posY + 48)
+            s =  chr(posY + 48) + ',' + chr(posX + 48)
             if(self.map.has_status(posY, posX, WUMPUS) == False and self.map.has_status(posY, posX, PIT) == False):
                 arrMove.append(s)
         if(y + 1 <= 9):
             posX = x
             posY = y + 1
-            s =  chr(posX + 48) + ',' + chr(posY + 48)
+            s =  chr(posY + 48) + ',' + chr(posX + 48)
             if(self.map.has_status(posY, posX, WUMPUS) == False and self.map.has_status(posY, posX, PIT) == False):
                 arrMove.append(s)
         
@@ -56,7 +56,7 @@ class Process:
             for s in move:
                 temp_y = int(s[0])
                 temp_x = int(s[1])
-                if(self.map.cell_table[temp_y][temp_x].closed == False or res.__contains__(s)):
+                if(self.map.cell_table[temp_y][temp_x].closed == False or s in res):
                     move.remove(s)
             if(move.__len__ > 1):
                 for s in move:
@@ -87,8 +87,9 @@ class Process:
         x = int(temp[1])
         y = int(temp[0])
         temp = self.map.Safe[0].split(',')
-        dist_x = temp[1]
-        dist_y = temp[0]
+        dist_x = int(temp[1])
+        dist_y = int(temp[0])
+        
         Max = abs(dist_x - x) + abs(dist_y - y)
         res = self.map.Safe[0]
         for s in self.map.Safe:
@@ -108,26 +109,26 @@ class Process:
         y, x = self.map.find_agent()
         pos = chr(y + 48) + ',' + chr(x + 48)
         res = []
-        if(self.map.has_status(y, x, AGENT)):
+        if(self.map.has_status(y, x, WUMPUS) == False or self.map.has_status(y, x, PIT) == False or self.map.has_status(y, x, STENCH) == False or self.map.has_status(y, x, BREEZE) == False):
             next_move = self.PossibleMove(pos)
             for s in next_move:
-                if(self.map.Visited.__contains__(s)):
+                if(s in self.map.Visited):
                     next_move.remove(s)
                 else:
-                    if(self.map.Safe.__contains__(s) == False):
+                    if(s not in self.map.Safe):
                         self.map.Safe.append(s)
                         
-            if(next_move.count != 0):
+            if(len(next_move) != 0):
                 move = next_move[random.randint(0, len(next_move) - 1)]
                 res.append(move)
                 self.map.Visited.append(move)
-                while(self.map.Safe.__contains__(move)):
+                while(move in self.map.Safe):
                     self.map.Safe.remove(move)
                 self.history_move = pos
             else:
-                if(self.map.Safe.count != 0):
-                    res = MoveLoop(pos, FindNearest(pos))
-                    self.history_move = res[res.count - 2]
+                if(len(self.map.Safe) != 0):
+                    res = self.MoveLoop(pos, self.FindNearest(pos))
+                    self.history_move = res[len(res) - 2]
             return res
         
         if(self.map.has_status(y, x, GOLD)):
@@ -142,12 +143,12 @@ class Process:
                 percept += "Breeze"
             self.map.Visited.append(pos)
             for s in next_move:
-                if(self.map.Visited.__contains__(s)):
+                if(s in self.map.Visited):
                     next_move.remove(s)
             for s in next_move:
-                if(self.map.Safe.__contains__(s)):
+                if(s in self.map.Safe):
                     self.map.Visited.append(s)
-                    while(self.map.Safe.__contains__(s)):
+                    while(s in self.map.Safe):
                         self.map.Safe.remove(s)
                     self.history_move = pos
                     res.append(s)
