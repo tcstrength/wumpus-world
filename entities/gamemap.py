@@ -3,7 +3,7 @@ from entities.statustypes import *
 class Cell:
     def __init__(self):
         self.status = 0
-        self.closed = False
+        self.closed = True
 
 class GameMap:
     def __init__(self, row_count, col_count):
@@ -21,6 +21,13 @@ class GameMap:
                     return [i, j]
         return [-1, -1]
 
+    # def findPitOrWumpus(self, posX, posY):
+    #     for i in range(self.get_row_count()):
+    #         for j in range(self.get_col_count()):
+    #             if (self.has_status(i, j, AGENT)):
+    #                 return [i, j]
+    #     return -1
+    
     def load_map(self, path):
         f = open(path, "r")
         lines = f.read().splitlines()
