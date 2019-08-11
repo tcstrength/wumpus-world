@@ -7,8 +7,6 @@ class Cell:
 
 class GameMap:
     def __init__(self, row_count, col_count):
-        self.Visited = []
-        self.Safe = []
         self.cell_table = [[]] * row_count
         for i in range(row_count):
             self.cell_table[i] = [None] * col_count
@@ -22,14 +20,6 @@ class GameMap:
                 if (self.has_status(i, j, AGENT)):
                     return [i, j]
         return [-1, -1]
-
-    def findSafe(self):
-        res = []
-        for i in range(self.get_row_count()):
-            for j in range(self.get_col_count()):
-                if (self.has_status(i, j, WUMPUS) == False or self.has_status(i, j, PIT) == False):
-                    res.append(chr(i + 48) + ',' + chr(j + 48))
-        return res
     
     def load_map(self, path):
         f = open(path, "r")
@@ -78,8 +68,6 @@ class GameMap:
             return
         self.cell_table[row][col].closed = False
         s = chr(row + 48) + ',' + chr(col + 48)
-        self.Visited.append(s)
-        self.Safe.append(s)
 
     def add_status(self, row, col, status):
         if (self.is_legal(row, col) == False):
