@@ -5,7 +5,7 @@ import time
 def main(gamemap, gamecontrol, move, process):
     if(len(move) == 0):
         move = process.CalculateMove()
-    if(len(move) != 0 and move[0] ==""):
+    if(len(move) == 0 or len(move) != 0 and move[0] ==""):
         return
     
     print(move)
