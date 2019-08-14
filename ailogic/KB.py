@@ -19,6 +19,7 @@ class KB:
         if(x - 1 >= 0):
             posX = x - 1
             posY = y
+            s = chr(posY + 48) + ',' + chr(posX + 48)
             if(self.pit.count(s) == 0 or self.wumpus.count(s) == 0):
                 arrMove.append(s)
         if(x + 1 <= 9):
